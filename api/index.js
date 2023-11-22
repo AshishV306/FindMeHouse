@@ -21,3 +21,13 @@ app.listen(3000, ()=>{
 app.use(express.json()); // we use this because when we use post request for testing in thunderclient for api/auth/sign we get undefined in console but when we use this we allow to send json to server so its get printed in console
 app.use('/api/user', userRouter);
 app.use('/api/auth', authRouter);
+
+app.use((err, req, res, next) => {
+  const statusCode = err.statusCode || 500;
+  const message = err.message || 'Internal Server Error';
+  return res.status(statusCode).json({
+    success: false,
+    statusCode,
+    message,
+  });
+});
