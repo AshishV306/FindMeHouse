@@ -5,9 +5,9 @@ export default function Header() {
   return (
     <header className='bg-slate-200 shadow-md'>
         <div className='flex justify-between items-center max-w-6xl mx-auto p-3'>
-        <h1>
-            <span>Ashish</span>
-            <span>Estate</span>
+        <h1 className='font-bold text-sm sm:text-xl flex flex-wrap'>
+            <span className='text-slate-500'>Ashish</span>
+            <span className='text-slate-700'>Estate</span>
             {/* The <span> tag is an inline container used to mark up a part of a text, or a part of a document.
             The <span> tag is easily styled by CSS or manipulated with JavaScript using the class or id attribute. */}
         </h1>
