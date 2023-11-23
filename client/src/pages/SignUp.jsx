@@ -7,16 +7,22 @@ export default function SignUp() {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+
   const handleChange = (e) => {
     setFormData({
-      ...formData,
+      ...formData, //keeps initial form data
       [e.target.id]: e.target.value,
     });
   };
+
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    
+    e.preventDefault(); //this prevent page from refreshing while submitting
+    
     try {
       setLoading(true);
+      
+      //this function is sending the form data to server , server is saving details and giving response as user created successfully
       const res = await fetch('/api/auth/signup', {
         method: 'POST',
         headers: {
@@ -24,8 +30,11 @@ export default function SignUp() {
         },
         body: JSON.stringify(formData),
       });
+
       const data = await res.json();
+
       console.log(data);
+      console.log(formData);
       if (data.success === false) {
         setLoading(false);
         setError(data.message);
@@ -34,11 +43,13 @@ export default function SignUp() {
       setLoading(false);
       setError(null);
       navigate('/sign-in');
+
     } catch (error) {
       setLoading(false);
       setError(error.message);
     }
   };
+
   return (
     <div className='p-3 max-w-lg mx-auto'>
       <h1 className='text-3xl text-center font-semibold my-7'>Sign Up</h1>
@@ -73,7 +84,7 @@ export default function SignUp() {
         </button>
         {/* <OAuth/> */}
       </form>
-      
+
       <div className='flex gap-2 mt-5'>
         <p>Have an account?</p>
         <Link to={'/sign-in'}>
